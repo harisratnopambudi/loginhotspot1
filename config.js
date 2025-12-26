@@ -9,8 +9,7 @@
 
 const BUYER_CONFIG = {
     // Tempelkan license key Anda di sini (dalam tanda kutip)
-    // License key valid untuk demo: "DEMO-VALID-KEY"
-    licenseKey: "FFFBB983E5CBC372F3EF5740544D",
+    licenseKey: "DEMO-VALID-KEY",
 
     // Nama bisnis/hotspot Anda (ditampilkan di header portal)
     businessName: "AshrafHotspot",
