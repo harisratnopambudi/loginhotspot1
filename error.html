@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Error - Hotspot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --error: #ef4444;
+            --error-glow: rgba(239, 68, 68, 0.4);
+            --bg-gradient-start: #0f0c29;
+            --bg-gradient-mid: #302b63;
+            --bg-gradient-end: #24243e;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 450px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 48px 32px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            animation: fadeInUp 0.6s ease forwards;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .error-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20%,
+            60% {
+                transform: translateX(-5px);
+            }
+
+            40%,
+            80% {
+                transform: translateX(5px);
+            }
+        }
+
+        .error-icon svg {
+            width: 40px;
+            height: 40px;
+            color: var(--error);
+        }
+
+        .title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--error);
+            margin-bottom: 12px;
+        }
+
+        .message {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .error-details {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 28px;
+            text-align: left;
+        }
+
+        .error-details-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--error);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .error-details-content {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-family: 'Consolas', monospace;
+            word-break: break-word;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -5px var(--primary-glow);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .help-text {
+            margin-top: 24px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .help-text a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .help-text a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 32px 24px;
+                border-radius: 20px;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="error-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        </div>
+
+        <h1 class="title" id="pageTitle">Terjadi Kesalahan</h1>
+        <p class="message">Maaf, terjadi masalah saat memproses permintaan Anda. Silakan periksa kredensial Anda dan
+            coba lagi.</p>
+
+        <div class="error-details">
+            <p class="error-details-title">Detail Error</p>
+            <p class="error-details-content">$(error-orig)</p>
+        </div>
+
+        <div class="actions">
+            <a href="$(link-login-only)" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                </svg>
+                Coba Login Lagi
+            </a>
+            <a href="$(link-status)" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Cek Status
+            </a>
+        </div>
+
+        <p class="help-text">
+            Masih bermasalah? <a href="#">Hubungi administrator</a>
+        </p>
+        <p id="footerCopyright"
+            style="text-align: center; margin-top: 16px; font-size: 0.75rem; color: rgba(255,255,255,0.4);">© 2025</p>
+    </div>
+
+    <script src="config.js?v=1"></script>
+    <script>
+        (function () {
+            const _0x4a7f = ['\x48\x4f\x54\x53\x50\x4f\x54', '\x50\x4f\x52\x54\x41\x4c', '\x53\x45\x43\x52\x45\x54', '\x32\x30\x32\x35'];
+            const _s = _0x4a7f.join('_');
+
+            function _customHash(str) {
+                let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+                for (let i = 0; i < str.length; i++) {
+                    const ch = str.charCodeAt(i);
+                    h1 = Math.imul(h1 ^ ch, 2654435761);
+                    h2 = Math.imul(h2 ^ ch, 1597334677);
+                }
+                h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+                h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+                h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
+                h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+                return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(16).padStart(16, '0');
+            }
+
+            function validateLicense(licenseKey) {
+                if (!licenseKey || typeof licenseKey !== 'string' || licenseKey.trim() === '') return false;
+                const key = licenseKey.trim();
+                const validPatterns = [/^[A-Z0-9]{4}(-[A-Z0-9]{4}){6}$/, /^[A-Z0-9@#$%&*\-_+=!?]{28}$/];
+                for (const pattern of validPatterns) {
+                    if (pattern.test(key)) {
+                        // Admin-generated 28-char keys with symbols - accept directly
+                        if (/^[A-Z0-9@#$%&*\-_+=!?]{28}$/.test(key)) return true;
+                        const checksum = _customHash(key + _s);
+                        if (checksum.startsWith('00') || checksum.startsWith('5a') || checksum.startsWith('7c') || checksum.includes('8b75')) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            const licenseKey = (typeof BUYER_CONFIG !== 'undefined' && BUYER_CONFIG.licenseKey) ? BUYER_CONFIG.licenseKey : '';
+            if (!validateLicense(licenseKey)) {
+                console.warn('License check failed but allowing access (legacy mode)');
+                // document.body.innerHTML = '...'; // DISABLED
+            } else {
+                const businessName = (typeof BUYER_CONFIG !== 'undefined' && BUYER_CONFIG.businessName) ? BUYER_CONFIG.businessName : '';
+                if (businessName) {
+                    document.title = businessName + ' - Error';
+                    document.getElementById('footerCopyright').textContent = '© 2025 ' + businessName + '. All rights reserved.';
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
