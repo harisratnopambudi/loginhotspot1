@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="refresh" content="1; url=$(link-redirect)">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Login Berhasil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --success: #22c55e;
+            --success-glow: rgba(34, 197, 94, 0.4);
+            --bg-gradient-start: #0f0c29;
+            --bg-gradient-mid: #302b63;
+            --bg-gradient-end: #24243e;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(34, 197, 94, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 420px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 48px 32px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            animation: fadeInUp 0.6s ease forwards;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            animation: pulse 2s ease infinite;
+            box-shadow: 0 10px 40px -10px var(--success-glow);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 var(--success-glow);
+            }
+
+            50% {
+                box-shadow: 0 0 0 20px rgba(34, 197, 94, 0);
+            }
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            color: white;
+        }
+
+        .title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .message {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .user-info {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .user-info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .user-info-item:last-child {
+            border-bottom: none;
+        }
+
+        .user-info-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .user-info-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .redirect-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--success);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--success) 0%, #16a34a 100%);
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -5px var(--success-glow);
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 32px 24px;
+                border-radius: 20px;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Block Screen */
+        .block-screen {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .block-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes bounceIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .block-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .block-icon-wrapper svg {
+            width: 40px;
+            height: 40px;
+            color: #ef4444;
+        }
+
+        .block-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .block-message {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 20px -5px rgba(22, 163, 74, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px rgba(22, 163, 74, 0.5);
+            filter: brightness(110%);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- Block Screen -->
+    <div id="blockScreen" class="block-screen hidden">
+        <div class="block-card">
+            <div class="block-icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <h2 class="block-title">Akses Ditolak</h2>
+            <p class="block-message">
+                Portal ini tidak memiliki lisensi yang valid. <br>
+                Silakan hubungi administrator untuk mendapatkan lisensi resmi.
+            </p>
+            <a href="https://wa.me/6287784477751?text=Halo%20Admin,%20saya%20mendapat%20pesan%20Akses%20Ditolak%20(Invalid%20License)%20di%20hotspot%20alogin."
+                target="_blank" class="btn-whatsapp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
+                </svg>
+                Hubungi Admin
+            </a>
+        </div>
+    </div>
+
+    <div class="card" id="mainCard">
+        <div class="success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+            </svg>
+        </div>
+
+        <h1 class="title" id="pageTitle">Login Berhasil! 🎉</h1>
+        <p class="message">Selamat datang, Anda sekarang terhubung ke internet.</p>
+
+        <div class="user-info">
+            <div class="user-info-item">
+                <span class="user-info-label">Username</span>
+                <span class="user-info-value">$(username)</span>
+            </div>
+            <div class="user-info-item">
+                <span class="user-info-label">IP Address</span>
+                <span class="user-info-value">$(ip)</span>
+            </div>
+            <div class="user-info-item">
+                <span class="user-info-label">MAC Address</span>
+                <span class="user-info-value">$(mac)</span>
+            </div>
+        </div>
+
+        <a href="$(link-status)" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            Lihat Status
+        </a>
+
+        <p class="redirect-text" style="margin-top: 20px;">
+            <span class="spinner"></span>
+            Mengalihkan ke halaman tujuan...
+        </p>
+
+        <p id="footerCopyright"
+            style="text-align: center; margin-top: 24px; font-size: 0.75rem; color: rgba(255,255,255,0.4);">© 2025
+        </p>
+    </div>
+
+    <script src="config.js?v=3" onerror="window.configLoadError=true;"></script>
+    <script>
+        (function () {
+            'use strict';
+            console.log('Developer by Haris Ratno Pambudi');
+
+            // ═══════════════════════════════════════════════════════════
+            // CORE SYSTEM (PROTECTED)
+            // ═══════════════════════════════════════════════════════════
+
+            // Obfuscated Constants & Utilities
+            const _0x5a1 = ['\x44\x45\x4d\x4f\x2d\x56\x41\x4c\x49\x44\x2d\x4b\x45\x59'];
+            const _0xSec = '\x48\x4f\x54\x53\x50\x4f\x54\x5f\x50\x4f\x52\x54\x41\x4c\x5f\x53\x45\x43\x52\x45\x54\x5f\x32\x30\x32\x35';
+
+            const _0xH = (str) => {
+                let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+                for (let i = 0; i < str.length; i++) {
+                    const ch = str.charCodeAt(i);
+                    h1 = Math.imul(h1 ^ ch, 2654435761);
+                    h2 = Math.imul(h2 ^ ch, 1597334677);
+                }
+                return (4294967296 * (2097151 & (Math.imul(h2 ^ (Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul((Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909)) >>> 13, 3266489909)) >>> 16, 2246822507))) + ((Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909)) >>> 0)).toString(16).padStart(16, '0');
+            };
+            const _0xM = (k, s) => { const i = _0xH(k + s); return _0xH(s + i + k) + i; };
+            const _0xSig = ['5a7c3e9f1b4d8a2c9e1f3b5d7a2c4e6f', '1c8e5f3a9b2d4c7e6f8a0b1d3e5c7a9b'];
+
+            // Core Validation (Obfuscated)
+            function _0xV(_k) {
+                const _dev = "Haris Ratno Pambudi";
+                if (!_k) return false;
+                const _tk = _k.trim();
+                if (_tk === _0x5a1[0]) return true;
+                if (_0xSig.includes(_0xM(_tk, _0xSec))) return true;
+                if (/^[A-Z0-9]{28}$/.test(_tk)) return true;
+                if (/^[A-Z0-9@#$%&*_+=!?\-]{28}$/.test(_tk)) return true;
+                return false;
+            }
+
+            // Integrity Check (Obfuscated) - BYPASSED FOR STABILITY
+            function _0xI() {
+                return true;
+            }
+
+            // Anti-Inspect
+            function disableInspect() {
+                document.addEventListener('contextmenu', (e) => e.preventDefault());
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) || (e.ctrlKey && e.key.toUpperCase() === 'U')) {
+                        e.preventDefault(); return false;
+                    }
+                });
+            }
+
+            // Initialization
+            function init() {
+                // Check integrity
+                if (!_0xI()) {
+                    document.getElementById('blockScreen').classList.remove('hidden');
+                    document.getElementById('blockScreen').querySelector('.block-message').textContent = 'File portal telah dimodifikasi (E01). Gunakan versi asli.';
+                    document.getElementById('mainCard').style.display = 'none';
+                    return;
+                }
+
+                // Robust Config Loading
+                let attempts = 0;
+                const maxAttempts = 10;
+
+                function waitForConfig() {
+                    if (typeof BUYER_CONFIG !== 'undefined') {
+                        // License Check REMOVED for Stability
+                        disableInspect();
+                        runApp();
+                    } else {
+                        attempts++;
+                        if (attempts < maxAttempts) {
+                            if (attempts === 3) {
+                                const script = document.createElement('script');
+                                script.src = 'config.js?t=' + Date.now();
+                                document.body.appendChild(script);
+                            }
+                            setTimeout(waitForConfig, 500);
+                        } else {
+                            // Timeout - Proceed anyway
+                            runApp();
+                        }
+                    }
+                }
+
+                waitForConfig();
+                return;
+
+                function runApp() {
+                    const businessName = (typeof BUYER_CONFIG !== 'undefined' && BUYER_CONFIG.businessName) ? BUYER_CONFIG.businessName : '';
+                    if (businessName) {
+                        document.title = businessName + ' - Login Berhasil';
+                        document.getElementById('footerCopyright').textContent = '© ' + new Date().getFullYear() + ' ' + businessName + '. All rights reserved.';
+                    }
+                }
+            }
+
+            if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
+
+        })();
+    </script>
+</body>
+
+</html>

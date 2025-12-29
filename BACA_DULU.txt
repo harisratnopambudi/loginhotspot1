@@ -1,0 +1,66 @@
+========================================================================
+PANDUAN PENGGUNAAN TEMPLATE LOGIN HOTSPOT PREMIUM
+========================================================================
+
+Terima kasih telah menggunakan template ini. Berikut adalah langkah-langkah mudah
+untuk mengatur, mengunggah, dan mengaktifkan halaman login hotspot baru Anda.
+
+------------------------------------------------------------------------
+LANGKAH 1: KONFIGURASI (WAJIB)
+------------------------------------------------------------------------
+Sebelum mengunggah, Anda perlu menyesuaikan pengaturan dasar agar sesuai
+dengan bisnis hotspot Anda.
+
+1. Buka file bernama `config.js` menggunakan Notepad atau Text Editor lainnya.
+2. Anda akan menemukan bagian konfigurasi seperti di bawah ini:
+
+   const BUYER_CONFIG = {
+       licenseKey: "MASUKKAN-LISENSI-DISINI",
+       businessName: "Nama Hotspot Anda",
+       loginMode: 1
+   };
+
+3. Lakukan perubahan berikut:
+   - `licenseKey`: Masukkan kode lisensi yang valid yang Anda terima.
+   - `businessName`: Ganti dengan nama Hotspot/WiFi Anda (contoh: "Berkah WiFi").
+   - `loginMode`:
+     * Ubah ke angka 1 jika sistem Anda menggunakan VOUCHER (User & Kode sama).
+     * Ubah ke angka 2 jika sistem Anda menggunakan MEMBER (Username & Password beda).
+
+4. Simpan file `config.js` yang sudah diedit (File -> Save).
+
+------------------------------------------------------------------------
+LANGKAH 2: UPLOAD KE MIKROTIK
+------------------------------------------------------------------------
+Setelah konfigurasi selesai, saatnya memasukkan file template ke router MikroTik.
+
+1. Hubungkan komputer/laptop Anda ke jaringan MikroTik.
+2. Buka aplikasi **Winbox** dan login ke router Anda.
+3. Klik menu **Files** di menu sebelah kiri.
+4. Siapkan folder template ini di komputer Anda (folder yang berisi login.html, config.js, dll).
+   * Pastikan nama foldernya sederhana, misal: `login_baru`.
+5. Seret (Drag & Drop) satu folder tersebut dari komputer Anda ke dalam jendela **List Files** di Winbox.
+6. Tunggu hingga proses upload selesai.
+
+------------------------------------------------------------------------
+LANGKAH 3: MENGAKTIFKAN HALAMAN LOGIN
+------------------------------------------------------------------------
+Langkah terakhir adalah memerintahkan MikroTik untuk menggunakan tampilan baru ini.
+
+1. Di Winbox, klik menu **IP** -> **Hotspot**.
+2. Pilih tab **Server Profiles**.
+3. Klik dua kali pada nama profil hotspot yang sedang aktif (biasanya `hsprof1` atau nama lain).
+4. Pada tab **General**, cari kolom **HTML Directory**.
+5. Klik tanda panah drop-down, lalu pilih nama folder yang baru saja Anda upload (contoh: `login_baru`).
+6. Klik **Apply** lalu **OK**.
+
+------------------------------------------------------------------------
+SELESAI!
+------------------------------------------------------------------------
+Coba login kembali ke WiFi hotspot Anda melalui HP atau Laptop.
+Tampilan login baru seharusnya sudah muncul.
+
+Jika terjadi masalah atau tampilan tidak berubah:
+1. Coba lupakan jaringan WiFi (Forget Network) di HP, lalu sambung ulang.
+2. Pastikan file `config.js` sudah di-save dengan benar.
+3. Pastikan lisensi yang dimasukkan valid.
