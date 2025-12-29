@@ -9,10 +9,10 @@
 
 const BUYER_CONFIG = {
     // Tempelkan license key Anda di sini (dalam tanda kutip)
-    licenseKey: "D255D89573B3873CA169C697C446",
+    licenseKey: "DEMO-VALID-KEY",
 
     // Nama bisnis/hotspot Anda (ditampilkan di header portal)
-    businessName: "AshrafHotspot",
+    businessName: "Haris DevLab",
 
     // Mode Login:
     // 1 = 1 input saja (kode voucher, username dan password sama)
